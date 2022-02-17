@@ -102,9 +102,9 @@ public class CustomerTest {
 
     @Test
     public void statementForNewMovieRental() {
-        Movie regularMovie = new Movie(TITLE, Movie.REGULAR);
-        Movie newReleaseMovie = new Movie(TITLE, Movie.NEW_RELEASE);
-        Movie childrenMovie = new Movie(TITLE, Movie.CHILDREN);
+        Movie regularMovie = new RegularMovie(TITLE, Movie.REGULAR);
+        Movie newReleaseMovie = new NewReleaseMovie(TITLE, Movie.NEW_RELEASE);
+        Movie childrenMovie = new ChildrenMovie(TITLE, Movie.CHILDREN);
 
         customer.addRental(new Rental(regularMovie, 1));
         customer.addRental(new Rental(newReleaseMovie, 4));
@@ -120,7 +120,18 @@ public class CustomerTest {
 
     // ctrl + alt + m > extract method
     private Rental createRentalFor(int daysRented, int priceCode) {
-        Movie movie = new Movie(TITLE, priceCode);
+        Movie movie = null;
+        switch (priceCode) {
+            case Movie.NEW_RELEASE:
+                movie = new NewReleaseMovie(TITLE, priceCode);
+                break;
+            case Movie.REGULAR:
+                movie = new RegularMovie(TITLE, priceCode);
+                break;
+            case Movie.CHILDREN:
+                movie = new ChildrenMovie(TITLE, priceCode);
+                break;
+        }
         return new Rental(movie, daysRented);
     }
 }
