@@ -38,14 +38,18 @@ public class Customer {
             result += "\t" + String.valueOf(each.getCharge()) + "(" + each.getMovie().getTitle() + ")" + "\n";
         }
 
+        result += "Amount owed is " + getTotalAmount() + "\n";
+        result += "You earned " + String.valueOf(frequentRentalPoints) + " frequent rental points";
+        return result;
+    }
+
+    // ctrl + alt + m > extract method
+    private double getTotalAmount() {
         double totalAmount = 0;
         for (Rental rental : rentals) {
             totalAmount += rental.getCharge();
         }
-
-        result += "Amount owed is " + String.valueOf(totalAmount) + "\n";
-        result += "You earned " + String.valueOf(frequentRentalPoints) + " frequent rental points";
-        return result;
+        return totalAmount;
     }
 
 }
