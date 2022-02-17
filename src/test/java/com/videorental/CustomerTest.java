@@ -32,9 +32,9 @@ public class CustomerTest {
     @Test
     public void statementForRegularMovieRentalForLessThan3Days() {
         // arrange
-        Movie movie = new Movie(TITLE, Movie.REGULAR);
         int daysRented = 2;
-        Rental rental = new Rental(movie, daysRented);
+        int priceCode = Movie.REGULAR;
+        Rental rental = createRentalFor(daysRented, priceCode);
         customer.addRental(rental);
 
         // assert
@@ -47,9 +47,9 @@ public class CustomerTest {
     @Test
     public void statementForRegularMovieRentalForMoreThan2Days() {
         // arrange
-        Movie movie = new Movie(TITLE, Movie.REGULAR);
         int daysRented = 3;
-        Rental rental = new Rental(movie, daysRented);
+        int priceCode = Movie.REGULAR;
+        Rental rental = createRentalFor(daysRented, priceCode);
         customer.addRental(rental);
 
         // assert
@@ -62,9 +62,9 @@ public class CustomerTest {
     @Test
     public void statementForNewReleaseMovie() {
         // arrange
-        Movie movie = new Movie(TITLE, Movie.NEW_RELEASE);
         int daysRented = 1;
-        Rental rental = new Rental(movie, daysRented);
+        int priceCode = Movie.NEW_RELEASE;
+        Rental rental = createRentalFor(daysRented, priceCode);
         customer.addRental(rental);
 
         // assert
@@ -77,9 +77,9 @@ public class CustomerTest {
     @Test
     public void statementForChildrenMovieRentalMoreThan3Days() {
         // arrange
-        Movie movie = new Movie(TITLE, Movie.CHILDREN);
         int daysRented = 4;
-        Rental rental = new Rental(movie, daysRented);
+        int priceCode = Movie.CHILDREN;
+        Rental rental = createRentalFor(daysRented, priceCode);
         customer.addRental(rental);
 
         // assert
@@ -92,9 +92,9 @@ public class CustomerTest {
     @Test
     public void statementForChildrenMovieRentalLessThan4Days() {
         // arrange
-        Movie movie = new Movie(TITLE, Movie.CHILDREN);
         int daysRented = 3;
-        Rental rental = new Rental(movie, daysRented);
+        int priceCode = Movie.CHILDREN;
+        Rental rental = createRentalFor(daysRented, priceCode);
         customer.addRental(rental);
 
         // assert
@@ -107,9 +107,9 @@ public class CustomerTest {
     @Test
     public void statementForNewReleaseMovieRentalMoreThan1Day() {
         // arrange
-        Movie movie = new Movie(TITLE, Movie.NEW_RELEASE);
         int daysRented = 2;
-        Rental rental = new Rental(movie, daysRented);
+        int priceCode = Movie.NEW_RELEASE;
+        Rental rental = createRentalFor(daysRented, priceCode);
         customer.addRental(rental);
 
         // assert
@@ -117,5 +117,11 @@ public class CustomerTest {
                 + "\t6.0(TITLE_NOT_IMPORTANT)\n"
                 + "Amount owed is 6.0\n"
                 + "You earned 2 frequent rental points"));
+    }
+
+    // ctrl + alt + m > extract method
+    private Rental createRentalFor(int daysRented, int priceCode) {
+        Movie movie = new Movie(TITLE, priceCode);
+        return new Rental(movie, daysRented);
     }
 }
