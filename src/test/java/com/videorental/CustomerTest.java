@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNull.notNullValue;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 public class CustomerTest {
@@ -32,10 +31,7 @@ public class CustomerTest {
     @Test
     public void statementForRegularMovieRentalForLessThan3Days() {
         // arrange
-        int daysRented = 2;
-        int priceCode = Movie.REGULAR;
-        Rental rental = createRentalFor(daysRented, priceCode);
-        customer.addRental(rental);
+        customer.addRental(createRentalFor(2, Movie.REGULAR));
 
         // assert
         assertThat(customer.statement(), is("Rental Record for NAME_NOT_IMPORTANT\n"
@@ -47,10 +43,7 @@ public class CustomerTest {
     @Test
     public void statementForRegularMovieRentalForMoreThan2Days() {
         // arrange
-        int daysRented = 3;
-        int priceCode = Movie.REGULAR;
-        Rental rental = createRentalFor(daysRented, priceCode);
-        customer.addRental(rental);
+        customer.addRental(createRentalFor(3, Movie.REGULAR));
 
         // assert
         assertThat(customer.statement(), is("Rental Record for NAME_NOT_IMPORTANT\n"
@@ -62,10 +55,7 @@ public class CustomerTest {
     @Test
     public void statementForNewReleaseMovie() {
         // arrange
-        int daysRented = 1;
-        int priceCode = Movie.NEW_RELEASE;
-        Rental rental = createRentalFor(daysRented, priceCode);
-        customer.addRental(rental);
+        customer.addRental(createRentalFor(1, Movie.NEW_RELEASE));
 
         // assert
         assertThat(customer.statement(), is("Rental Record for NAME_NOT_IMPORTANT\n"
@@ -77,10 +67,7 @@ public class CustomerTest {
     @Test
     public void statementForChildrenMovieRentalMoreThan3Days() {
         // arrange
-        int daysRented = 4;
-        int priceCode = Movie.CHILDREN;
-        Rental rental = createRentalFor(daysRented, priceCode);
-        customer.addRental(rental);
+        customer.addRental(createRentalFor(4, Movie.CHILDREN));
 
         // assert
         assertThat(customer.statement(), is("Rental Record for NAME_NOT_IMPORTANT\n"
@@ -92,10 +79,7 @@ public class CustomerTest {
     @Test
     public void statementForChildrenMovieRentalLessThan4Days() {
         // arrange
-        int daysRented = 3;
-        int priceCode = Movie.CHILDREN;
-        Rental rental = createRentalFor(daysRented, priceCode);
-        customer.addRental(rental);
+        customer.addRental(createRentalFor(3, Movie.CHILDREN));
 
         // assert
         assertThat(customer.statement(), is("Rental Record for NAME_NOT_IMPORTANT\n"
@@ -107,10 +91,7 @@ public class CustomerTest {
     @Test
     public void statementForNewReleaseMovieRentalMoreThan1Day() {
         // arrange
-        int daysRented = 2;
-        int priceCode = Movie.NEW_RELEASE;
-        Rental rental = createRentalFor(daysRented, priceCode);
-        customer.addRental(rental);
+        customer.addRental(createRentalFor(2, Movie.NEW_RELEASE));
 
         // assert
         assertThat(customer.statement(), is("Rental Record for NAME_NOT_IMPORTANT\n"
