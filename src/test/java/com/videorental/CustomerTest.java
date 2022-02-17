@@ -9,24 +9,20 @@ import static org.junit.Assert.assertThat;
 
 public class CustomerTest {
 
+    // ctrl + alt + shift + t > introduce constant
     public static final String NAME = "NAME_NOT_IMPORTANT";
     public static final String TITLE = "TITLE_NOT_IMPORTANT";
+    // ctrl + alt + shift + t > introduce field
+    private Customer customer = new Customer(NAME);
 
-    // ctrl + alt + shift + t > introduce constant
+
     @Test
     public void returnNewCustomer() {
-        Customer customer = new Customer(NAME);
         assertThat(customer, is(notNullValue()));
     }
 
     @Test
     public void statementForNoRental() {
-        // arrange
-        Customer customer = new Customer(NAME);
-
-        // act
-        String statement = customer.statement();
-
         // assert
         assertThat(customer.statement(), is("Rental Record for NAME_NOT_IMPORTANT\n"
                 + "Amount owed is 0.0\n"
@@ -36,7 +32,6 @@ public class CustomerTest {
     @Test
     public void statementForRegularMovieRentalForLessThan3Days() {
         // arrange
-        Customer customer = new Customer(NAME);
         Movie movie = new Movie(TITLE, Movie.REGULAR);
         int daysRented = 2;
         Rental rental = new Rental(movie, daysRented);
@@ -52,7 +47,6 @@ public class CustomerTest {
     @Test
     public void statementForRegularMovieRentalForMoreThan2Days() {
         // arrange
-        Customer customer = new Customer(NAME);
         Movie movie = new Movie(TITLE, Movie.REGULAR);
         int daysRented = 3;
         Rental rental = new Rental(movie, daysRented);
@@ -68,7 +62,6 @@ public class CustomerTest {
     @Test
     public void statementForNewReleaseMovie() {
         // arrange
-        Customer customer = new Customer(NAME);
         Movie movie = new Movie(TITLE, Movie.NEW_RELEASE);
         int daysRented = 1;
         Rental rental = new Rental(movie, daysRented);
@@ -84,7 +77,6 @@ public class CustomerTest {
     @Test
     public void statementForChildrenMovieRentalMoreThan3Days() {
         // arrange
-        Customer customer = new Customer("NAME_NOT_IMPORTANT");
         Movie movie = new Movie(TITLE, Movie.CHILDREN);
         int daysRented = 4;
         Rental rental = new Rental(movie, daysRented);
@@ -100,7 +92,6 @@ public class CustomerTest {
     @Test
     public void statementForChildrenMovieRentalLessThan4Days() {
         // arrange
-        Customer customer = new Customer("NAME_NOT_IMPORTANT");
         Movie movie = new Movie(TITLE, Movie.CHILDREN);
         int daysRented = 3;
         Rental rental = new Rental(movie, daysRented);
@@ -116,7 +107,6 @@ public class CustomerTest {
     @Test
     public void statementForNewReleaseMovieRentalMoreThan1Day() {
         // arrange
-        Customer customer = new Customer("NAME_NOT_IMPORTANT");
         Movie movie = new Movie(TITLE, Movie.NEW_RELEASE);
         int daysRented = 2;
         Rental rental = new Rental(movie, daysRented);
