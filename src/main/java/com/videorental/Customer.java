@@ -30,17 +30,8 @@ public class Customer {
             result += "\t" + String.valueOf(each.getCharge()) + "(" + each.getMovie().getTitle() + ")" + "\n";
         }
 
-        int frequentRentalPoints = 0;
-        for (Rental rental : rentals) {
-            frequentRentalPoints++;
-            // add bonus for a two day new release rental
-            if ((rental.getMovie().getPriceCode() == Movie.NEW_RELEASE) && rental.getDaysRented() > 1) {
-                frequentRentalPoints++;
-            }
-        }
-
         result += "Amount owed is " + getTotalAmount() + "\n";
-        result += "You earned " + String.valueOf(frequentRentalPoints) + " frequent rental points";
+        result += "You earned " + getFrequentRentalPoints() + " frequent rental points";
         return result;
     }
 
@@ -51,6 +42,19 @@ public class Customer {
             totalAmount += rental.getCharge();
         }
         return totalAmount;
+    }
+
+    // ctrl + alt + m > extract method
+    private int getFrequentRentalPoints() {
+        int frequentRentalPoints = 0;
+        for (Rental rental : rentals) {
+            frequentRentalPoints++;
+            // add bonus for a two day new release rental
+            if ((rental.getMovie().getPriceCode() == Movie.NEW_RELEASE) && rental.getDaysRented() > 1) {
+                frequentRentalPoints++;
+            }
+        }
+        return frequentRentalPoints;
     }
 
 }
