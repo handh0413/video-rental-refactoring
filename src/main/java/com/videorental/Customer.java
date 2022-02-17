@@ -21,17 +21,20 @@ public class Customer {
     }
 
     public String statement() {
-        Iterator<Rental> iterator = rentals.iterator();
         String result = "Rental Record for " + getName() + "\n";
-
-        while (iterator.hasNext()) {
-            Rental each = (Rental) iterator.next();
-            // show figures
-            result += "\t" + String.valueOf(each.getCharge()) + "(" + each.getMovie().getTitle() + ")" + "\n";
-        }
-
+        result = getRentalLineReports(result);
         result += "Amount owed is " + getTotalAmount() + "\n";
         result += "You earned " + getFrequentRentalPoints() + " frequent rental points";
+        return result;
+    }
+
+    // ctrl + alt + m > extract method
+    private String getRentalLineReports(String result) {
+        Iterator<Rental> iterator = rentals.iterator();
+        while (iterator.hasNext()) {
+            Rental each = (Rental) iterator.next();
+            result += "\t" + String.valueOf(each.getCharge()) + "(" + each.getMovie().getTitle() + ")" + "\n";
+        }
         return result;
     }
 
