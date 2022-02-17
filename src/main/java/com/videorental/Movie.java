@@ -1,6 +1,8 @@
 package com.videorental;
 
-public class Movie {
+import javax.swing.text.AsyncBoxView;
+
+public abstract class Movie {
     public static final int REGULAR = 1;
     public static final int NEW_RELEASE = 2;
     public static final int CHILDREN = 3;
@@ -24,4 +26,9 @@ public class Movie {
     public void setPriceCode(int priceCode) {
         this.priceCode = priceCode;
     }
+
+    // move instance method + refactoring
+    abstract double getChargeFor(int daysRented, Rental rental);
+
+    abstract int getFrequentRentalPointsFor(int daysRented);
 }

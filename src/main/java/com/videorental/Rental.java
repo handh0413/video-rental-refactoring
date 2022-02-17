@@ -16,4 +16,11 @@ public class Rental {
     public int getDaysRented() {
         return daysRented;
     }
+
+    // ctrl + alt + shift + t > move instance method
+    // shift + f6 > method 명 수정
+    public double getCharge() {
+        return movie.getChargeFor(daysRented, this);
+    }
+
 }
