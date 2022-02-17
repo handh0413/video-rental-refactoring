@@ -57,11 +57,10 @@ public class Customer {
         return totalAmount;
     }
 
-    // ctrl + alt + m > extract method
     private int getFrequentRentalPoints() {
         int frequentRentalPoints = 0;
         for (Rental rental : rentals) {
-            frequentRentalPoints += rental.getFrequentRentalPointsFor(rental.getDaysRented());
+            frequentRentalPoints += rental.getMovie().getFrequentRentalPointsFor(rental.getDaysRented());
         }
         return frequentRentalPoints;
     }
