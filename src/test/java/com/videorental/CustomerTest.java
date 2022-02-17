@@ -100,6 +100,24 @@ public class CustomerTest {
                 + "You earned 2 frequent rental points"));
     }
 
+    @Test
+    public void statementForNewMovieRental() {
+        Movie regularMovie = new Movie(TITLE, Movie.REGULAR);
+        Movie newReleaseMovie = new Movie(TITLE, Movie.NEW_RELEASE);
+        Movie childrenMovie = new Movie(TITLE, Movie.CHILDREN);
+
+        customer.addRental(new Rental(regularMovie, 1));
+        customer.addRental(new Rental(newReleaseMovie, 4));
+        customer.addRental(new Rental(childrenMovie, 4));
+
+        assertThat(customer.statement(), is("Rental Record for NAME_NOT_IMPORTANT\n"
+                + "\t2.0(TITLE_NOT_IMPORTANT)\n"
+                + "\t12.0(TITLE_NOT_IMPORTANT)\n"
+                + "\t3.0(TITLE_NOT_IMPORTANT)\n"
+                + "Amount owed is 17.0\n"
+                + "You earned 4 frequent rental points"));
+    }
+
     // ctrl + alt + m > extract method
     private Rental createRentalFor(int daysRented, int priceCode) {
         Movie movie = new Movie(TITLE, priceCode);
