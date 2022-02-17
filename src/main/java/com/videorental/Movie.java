@@ -30,12 +30,5 @@ public abstract class Movie {
     // move instance method + refactoring
     abstract double getChargeFor(int daysRented, Rental rental);
 
-    int getFrequentRentalPointsFor(int daysRented) {
-        // add bonus for a two day new release rental
-        if ((getPriceCode() == Movie.NEW_RELEASE) && daysRented > 1) {
-            return 2;
-        } else {
-            return 1;
-        }
-    }
+    abstract int getFrequentRentalPointsFor(int daysRented);
 }

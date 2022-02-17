@@ -12,4 +12,9 @@ public class ChildrenMovie extends Movie {
             thisAmount += (daysRented - 3) * 1.5;
         return thisAmount;
     }
+
+    @Override
+    int getFrequentRentalPointsFor(int daysRented) {
+        return 1;
+    }
 }
