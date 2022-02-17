@@ -22,18 +22,17 @@ public class Customer {
 
     public String statement() {
         String result = "Rental Record for " + getName() + "\n";
-        result = getRentalLineReports(result);
+        result += getRentalLineReports();
         result += "Amount owed is " + getTotalAmount() + "\n";
         result += "You earned " + getFrequentRentalPoints() + " frequent rental points";
         return result;
     }
 
     // ctrl + alt + m > extract method
-    private String getRentalLineReports(String result) {
-        Iterator<Rental> iterator = rentals.iterator();
-        while (iterator.hasNext()) {
-            Rental each = (Rental) iterator.next();
-            result += "\t" + String.valueOf(each.getCharge()) + "(" + each.getMovie().getTitle() + ")" + "\n";
+    private String getRentalLineReports() {
+        String result = "";
+        for (Rental rental : rentals) {
+            result += "\t" + rental.getCharge() + "(" + rental.getMovie().getTitle() + ")" + "\n";
         }
         return result;
     }
