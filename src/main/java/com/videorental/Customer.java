@@ -21,11 +21,15 @@ public class Customer {
     }
 
     public String statement() {
-        String result = "Rental Record for " + getName() + "\n";
+        String result = getStatementHeader();
         result += getRentalLineReports();
-        result += "Amount owed is " + getTotalAmount() + "\n";
-        result += "You earned " + getFrequentRentalPoints() + " frequent rental points";
+        result = getStatementFooter(result);
         return result;
+    }
+
+    // ctrl + alt + m > extract method
+    private String getStatementHeader() {
+        return "Rental Record for " + getName() + "\n";
     }
 
     // ctrl + alt + m > extract method
@@ -34,6 +38,13 @@ public class Customer {
         for (Rental rental : rentals) {
             result += "\t" + rental.getCharge() + "(" + rental.getMovie().getTitle() + ")" + "\n";
         }
+        return result;
+    }
+
+    // ctrl + alt + m > extract method
+    private String getStatementFooter(String result) {
+        result += "Amount owed is " + getTotalAmount() + "\n";
+        result += "You earned " + getFrequentRentalPoints() + " frequent rental points";
         return result;
     }
 
